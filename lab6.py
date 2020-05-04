@@ -1,4 +1,4 @@
-import math, random, numpy.linalg,_pydecimal
+import math, random, numpy.linalg,_pydecimal, time
 from scipy.stats import f
 from scipy.stats import t
 
@@ -220,10 +220,17 @@ for i in range(100):
         d = 11 - student_lst.count(0)
         dep += N - d
         undep += d
-        if fisher():
-            print("The regression equation is adequate to the original")
+        t = time.time() + 10
+        ad = 0
+        inad = 0
+        print("Running the loop for 10 seconds, counting number of adequate and inadequate results..." + "\n")
+        while t > time.time():
             adequacy = True
-        else:
-            print("The regression equation is inadequate to the original")
+            if fisher():
+                ad += 1
+            else:
+                inad += 1
+        print("The regression equation is adequate to the original", ad)
+        print("The regression equation is inadequate to the original", inad)
 print("The number of significant: ", dep)
 print("The number is not insignificant: ", undep)
